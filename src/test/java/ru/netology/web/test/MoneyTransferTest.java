@@ -12,7 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MoneyTransferTest {
   DashboardPage dashboardPage;
-
+  @BeforeAll
+  static void setUpAll() {
+    Configuration.headless = true;
+  }
   @BeforeEach
   void setUp() {
     open("http://localhost:9999");
