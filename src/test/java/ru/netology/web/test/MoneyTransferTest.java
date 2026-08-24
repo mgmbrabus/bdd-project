@@ -12,10 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MoneyTransferTest {
   DashboardPage dashboardPage;
-  @BeforeAll
-  static void setUpAll() {
-    Configuration.headless = true;
-  }
+
   @BeforeEach
   void setUp() {
     open("http://localhost:9999");
@@ -70,12 +67,11 @@ public class MoneyTransferTest {
   @DisplayName("Ошибка при переводе суммы, превышающей остаток на карте")
   void shouldNotTransferMoneyIfAmountExceedsBalance() {
     var firstCardBalance = dashboardPage.getCardBalance(0);
-    int amount = firstCardBalance + 5000; // Пытаемся перевести больше, чем есть
+    int amount = firstCardBalance + 5000;
 
     var transferPage = dashboardPage.selectCardToTransfer(1);
     transferPage.makeTransfer(String.valueOf(amount), DataHelper.getFirstCardInfo());
 
-    // Проверяем появление сообщения об ошибке (этот тест упадет из-за бага SUT — заводим Issue на GitHub)
     transferPage.findErrorMessage("Ошибка");
   }
 }
