@@ -72,6 +72,7 @@ public class MoneyTransferTest {
     var transferPage = dashboardPage.selectCardToTransfer(1);
     transferPage.makeTransfer(String.valueOf(amount), DataHelper.getFirstCardInfo());
 
-    transferPage.findErrorMessage("Ошибка");
+    // Текст должен точно совпадать с ожидаемым результатом в Issue
+    transferPage.findErrorMessage("Ошибка! Недостаточно средств для перевода");
   }
 }
